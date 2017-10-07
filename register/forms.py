@@ -4,7 +4,7 @@ from . import utils
 
 class RegistrationForm(forms.ModelForm):
     college = forms.CharField(label=u'الكلية',
-                              max_length=1,
+                              max_length=10,
                               widget=forms.Select(choices=colleges))
     number = forms.IntegerField(label=u"الدفعة", widget=forms.Select(choices=[(i, i) for i in range(1, 18)]))
 
