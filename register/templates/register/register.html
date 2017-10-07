@@ -59,7 +59,8 @@ $(function(){
             };
         }else if ($(this).val() == 'FMRTP'){
             $("#id_number").prop("disabled", false);
-            $("#id_university_id").val('').hide();
+            $("#id_unisersity_id").val('');
+            $("#id_unisersity_id").closest('.form-group').hide();
             batch_choices = {
                 2017: "2017/2018",
             };
