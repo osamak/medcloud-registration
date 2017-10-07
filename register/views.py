@@ -33,13 +33,15 @@ def register(request):
                                 instance=initial_registration)
         if form.is_valid():
             email = form.cleaned_data['email']
-            if not email.endswith('ksau-hs.edu.sa'):
-                context = {'form': form, 'error_message': 'university_email'}
-            elif Registration.objects.filter(email__iexact=email, is_successful=True):
+            college = form.cleaned_data['college']
+            if Registration.objects.filter(email__iexact=email, is_successful=True):
                 context = {'form': form, 'error_message': u'already_registered'}
             else:
-                user = email.split('@')[0].lower()
                 registration = form.save()
+                if college == 'FMRTP':
+                    user = 'user%d' % registration.pk
+                else:
+                    user = email.split('@')[0].lower()
                 group = str(registration.group)
                 if utils.createuser(user, password, group):
                     registration.is_successful = True
@@ -65,29 +67,26 @@ def forgotten(request):
         form = ResetPasswordForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            if not email.endswith('ksau-hs.edu.sa'):
-                context = {'form': form, 'error_message': 'university_email'}
-            else:
-                try: 
-                    previous_registration = Registration.objects.get(email__iexact=email,
-                                                                     is_successful=True)
-                except ObjectDoesNotExist:
-                    previous_registration = None
-                    context = {'form': form, 'error_message': 'not_registered'}
+            try: 
+                previous_registration = Registration.objects.get(email__iexact=email,
+                                                                 is_successful=True)
+            except ObjectDoesNotExist:
+                previous_registration = None
+                context = {'form': form, 'error_message': 'not_registered'}
 
-                if previous_registration:
-                    new_password = utils.generate_password()
-                    user = previous_registration.email.split('@')[0]
-                    if utils.reset_password(user, new_password):
-                        previous_registration.password = new_password
-                        previous_registration.forgotten_password = True
-                        previous_registration.save()
-                        send_mail(u'حسابك على السحابة الطبية', forgotten_message %
-                                  (user, new_password), 'info@ksauhs-med.com',
-                                  [email], fail_silently=False)
-                        return HttpResponseRedirect(reverse('register:thanks'))
-                    else:
-                        context = {'form': form, 'error_message': 'unknown'}
+            if previous_registration:
+                new_password = utils.generate_password()
+                user = previous_registration.email.split('@')[0]
+                if utils.reset_password(user, new_password):
+                    previous_registration.password = new_password
+                    previous_registration.forgotten_password = True
+                    previous_registration.save()
+                    send_mail(u'حسابك على السحابة الطبية', forgotten_message %
+                              (user, new_password), 'info@ksauhs-med.com',
+                              [email], fail_silently=False)
+                    return HttpResponseRedirect(reverse('register:thanks'))
+                else:
+                    context = {'form': form, 'error_message': 'unknown'}
         else:
             context = {'form': form}
     else:

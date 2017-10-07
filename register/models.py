@@ -1,17 +1,17 @@
-# -*- coding: utf-8  -*-
 from django.db import models
 
 colleges = [
-    ('', u'الكلية'),
-    ('M', u'كلية الطب'),
-    ('D', u'كلية الأسنان'),
-    ('P', u'كلية الصيدلة'),
-    ('N', u'كلية التمريض'),
-    ]
+    ('', 'الكلية'),
+    ('M', 'كلية الطب'),
+    ('D', 'كلية الأسنان'),
+    ('P', 'كلية الصيدلة'),
+    ('N', 'كلية التمريض'),
+    ('FMRTP', 'Family Medicine Residency Training Program')
+]
 
 class Batch(models.Model):
     number = models.PositiveSmallIntegerField(verbose_name=u"رقم الدفعة")
-    college = models.CharField(max_length=1, choices=colleges,
+    college = models.CharField(max_length=10, choices=colleges,
                                verbose_name=u"الكلية")
 
     def __unicode__(self):
@@ -27,7 +27,7 @@ class Registration(models.Model):
     group = models.ForeignKey(Batch, verbose_name=u"الدفعة",
                               null=True,
                               on_delete=models.SET_NULL)
-    unisersity_id = models.PositiveIntegerField(
+    unisersity_id = models.PositiveIntegerField(null=True, blank=True,
                                        verbose_name=u"الرقم الجامعي")
     password = models.CharField(max_length=6)
     date = models.DateTimeField('date', auto_now=True)

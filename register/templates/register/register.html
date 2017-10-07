@@ -7,8 +7,6 @@
 حدث خطأ غير معروف!  راسلنا على <a href="mailto:info@ksauhs-med.com">info@ksauhs-med.com</a> لنساعدك على حلّه.
 {% elif error_message == 'already_registered' %}
 سبق أن سجّلت!  <a href="{% url 'register:forgotten' %}">أعد ضبط كلمة السر</a> إن كنت نسيتها.
-{% elif error_message == 'university_email' %}
-يمكن فقط لمنسوبي كلية الطب في جامعة الملك سعود بن عبد العزيز للعلوم الصحية التسجيل في السحابة الطبية. نرجو استخدام بريد جامعي.
 {% endif %}
 	</p>
 {% else %}
@@ -58,6 +56,12 @@ $(function(){
                 15: "الدفعة الخامسة عشر",
                 14: "الدفعة الرابعة عشر",
                 13: "الدفعة الثالثة عشر",
+            };
+        }else if ($(this).val() == 'FMRTP'){
+            $("#id_number").prop("disabled", false);
+            $("#id_university_id").val('').hide();
+            batch_choices = {
+                2017: "2017/2018",
             };
         }
         $.each(batch_choices, function(key, value){
