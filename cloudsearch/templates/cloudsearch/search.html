@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+{% block title %}ابحث{% endblock %}
+{% block content %}
+	<div class="mnote">
+		<p><b>السحابة الطبية</b> مكتبة تعاونية لطلاب كلية الطب في جامعة الملك سعود بن عبد العزيز للعلوم الصحية. يشترك الطلاب والطالبات من مختلف الأقسام والدفعات في جمع المحاضرات والكتب والفيديوهات والتطبيقات المفيدة، لتكون مرجعا شاملا متكاملا. <a href="{% url 'register:register' %}">سجّل</a> أو <a href="https://ksauhs-med.com">ادخل</a> أو <a href="http://public.ksauhs-med.com/">تصفّح</a>.</p>
+	</div>
+	<p class="alert alert-info">من خلال مربّع البحث هذا يمكنك البحث في محتويات السحابة الطبيّة. قد تحتاج الملفات المضافة حديثا ساعة على الأكثر لتظهر في البحث.</p>
+	<form action="{% url 'search' %}" method="GET" class="form">
+	{% bootstrap_form form %}
+		{% buttons %}
+		<button type="submit" class="btn btn-primary btn-block">
+		{% bootstrap_icon "ok-sign" %} ابحث
+		</button>
+		{% endbuttons %}
+	</form>
+{% endblock %}

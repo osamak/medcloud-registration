@@ -1,0 +1,25 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+{% block title %}نتائج: {{ term }}{% endblock %}
+{% block content %}
+	<form action="{% url 'search' %}" method="GET" class="form">
+	{% bootstrap_form form %}
+		{% buttons %}
+		<button type="submit" class="btn btn-primary btn-block">
+		{% bootstrap_icon "ok-sign" %} ابحث
+		</button>
+		{% endbuttons %}
+	</form>
+
+{% if results %}
+<p>عثرنا على {{ results|length }} نتيجة.</p>
+	<ol style="direction:ltr;">
+	{% for result in results %}
+		<li><a href="https://ksauhs-med.com/public/Medical College/{{ result.0|urlencode }}/{{ result.1|urlencode }}">{{ result.0 }}/<b>{{ result.1 }}</b></a></li>
+	{% endfor %}
+	</ol>
+{% else %}
+	<p class="alert alter-warning">لم يعثر على أي نتائج</p>
+{% endif %}
+
+{% endblock %}
+

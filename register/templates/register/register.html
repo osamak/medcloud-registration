@@ -1,0 +1,74 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+{% block title %}سجّل{% endblock %}
+{% block content %}
+{% include 'header.html' %}
+	{% if error_message %}<p class="alert alert-danger">
+{% if error_message == 'unknown' %}
+حدث خطأ غير معروف!  راسلنا على <a href="mailto:info@ksauhs-med.com">info@ksauhs-med.com</a> لنساعدك على حلّه.
+{% elif error_message == 'already_registered' %}
+سبق أن سجّلت!  <a href="{% url 'register:forgotten' %}">أعد ضبط كلمة السر</a> إن كنت نسيتها.
+{% elif error_message == 'university_email' %}
+يمكن فقط لمنسوبي كلية الطب في جامعة الملك سعود بن عبد العزيز للعلوم الصحية التسجيل في السحابة الطبية. نرجو استخدام بريد جامعي.
+{% endif %}
+	</p>
+{% else %}
+<p class="alert alert-warning">إذا كنت نسيت كلمة السر، يمكنك إعادة ضبطها <a href="{% url 'register:forgotten' %}">من هنا</a>.</p>
+{% endif %}
+	<form action="{% url 'register:register' %}" method="post" class="form">
+	  {% csrf_token %}
+	{% bootstrap_form form %}
+		{% buttons %}
+		<button type="submit" class="btn btn-primary btn-block">
+		{% bootstrap_icon "ok-sign" %} سجّل
+		</button>
+		{% endbuttons %}
+	</form>
+<script>
+$(function(){
+    $("#id_number").html("<option value=\"\">الدفعة</option>");
+    $("#id_number").prop("disabled", true);
+    $("#id_college").on("change", function(){
+        $("#id_number").html("<option value=\"\">الدفعة</option>");
+        $("#id_number").prop("disabled", true);
+        if ($(this).val() == 'M'){
+            $("#id_number").prop("disabled", false);
+            batch_choices = {
+                15: "الدفعة الخامسة عشر",
+                14: "الدفعة الرابعة عشر",
+                13: "الدفعة الثالثة عشر",
+                12: "الدفعة الثانية عشرة",
+                11: "الدفعة الحادية عشرة",
+                10: "الدفعة العاشرة",
+                9: "الدفعة التاسعة",
+            };
+        }else if ($(this).val() == 'D' || $(this).val() == 'P'){
+            $("#id_number").prop("disabled", false);
+            batch_choices = {
+                6: "الدفعة السادسة",
+                5: "الدفعة الخامسة",
+                4: "الدفعة الرابعة",
+                3: "الدفعة الثالثة",
+                2: "الدفعة الثانية",
+                1: "الدفعة الأولى",
+            };
+        }else if ($(this).val() == 'N'){
+            $("#id_number").prop("disabled", false);
+            batch_choices = {
+                16: "الدفعة السادسة عشر",
+                15: "الدفعة الخامسة عشر",
+                14: "الدفعة الرابعة عشر",
+                13: "الدفعة الثالثة عشر",
+            };
+        }
+        $.each(batch_choices, function(key, value){
+            $("#id_number")
+                .append($("<option></option>")
+                        .attr("value", key)
+                        .text(value));
+            });
+    });
+
+});
+</script>
+
+{% endblock %}

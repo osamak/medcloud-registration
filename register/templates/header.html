@@ -1,0 +1,4 @@
+	{% if not about %}<div class="mnote">{% endif %}
+
+		<p>{% if about %}<strong>السحابة الطبية</strong>{% else %}<strong><a href="{% url 'about'%}">السحابة الطبية</a></strong>{% endif %} مكتبة تعاونية لطلاب كلية الطب في جامعة الملك سعود بن عبد العزيز للعلوم الصحية. يشترك الطلاب والطالبات من مختلف الأقسام والدفعات في جمع المحاضرات والكتب والفيديوهات والتطبيقات المفيدة، لتكون مرجعا شاملا متكاملا. <a href="https://ksauhs-med.com">ادخل</a> أو <a href="http://public.ksauhs-med.com/">تصفّح</a>.</p>
+	{% if not about %}</div>{% endif %}

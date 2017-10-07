@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}خطأ غير متوقع!{% endblock %}
+{% block content %}
+<p class="alert alert-danger">حدث خطأ غير متوقع!  ساعدنا في إصلاحه <a href="mailto:info@ksauhs-med.com">بالإبلاغ عنه</a>.</p>
+{% endblock %}
+{% block customtracking %}
+  _paq.push(['setDocumentTitle',  '500/URL = ' +  encodeURIComponent(document.location.pathname+document.location.search) + '/From = ' + encodeURIComponent(document.referrer)]);
+{% endblock %}

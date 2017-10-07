@@ -1,0 +1,60 @@
+<!DOCTYPE html>{% load staticfiles %}
+<html lang="ar">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>السحابة الطبية | {% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-rtl.min3.2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </head>
+  <body>
+	<div id="header" class="animated bounceInDown container">
+		<div class="row">
+		        <div class="col-xs-12">
+				<a href="/"><img src="{% static 'img/logo-small.png' %}"></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row">
+			<!--<div class="wrapper">-->
+		        <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+{% block content %}{% endblock %}
+			</div>
+		</div>
+		<div class="footer">
+			<div class="pull-right"><span><a href="{% url 'about' %}">بُني بأيدٍ طلابية</a></span></div>
+        	        <div class="pull-left"><span><a target="_blank" href="https://www.youtube.com/watch?v=IeTybKL1pM4">حقّك في النسخ مكفول</a></span></div>
+        	</div>
+	</div><!--/container-->
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+{% block customtracking %}{% endblock %}
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://www.ksauhs-med.com/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 2]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//www.ksauhs-med.com/piwik/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->	 
+  </body>
+</html>

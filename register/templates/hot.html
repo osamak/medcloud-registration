@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}أنشط الملفات على السحابة الطبية{% endblock %}
+{% block content %}
+
+أعلى الملفات تنزيلا على السحابة الطبيّة هذا الأسبوع!
+
+<table id="statTable" class="display">
+  <thead><tr><th>Filename</th><th>Downloads</th></tr></thead>
+  <tbody>
+
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/Preferred Slides/Week 5 - Imaging in Biliary Disease With NOTES (Batch 9&10 NOTES).pdf</td><td>210</td></tr>
+			<tr><td>BATCH 9 EXAMs/0.5- Premed (Semester 4)/Written/Pharmacology/B11- Pharmacology - Midterm 2 .pdf</td><td>204</td></tr>
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/OSPE/Pathology Revision (WITH NOTES).pdf</td><td>192</td></tr>
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/OSCE/Celiac Disease Education.pdf</td><td>187</td></tr>
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/OSCE/GI Examination.pdf</td><td>145</td></tr>
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/OSCE/Chronic Liver Disease Manifestation Examination.pdf</td><td>139</td></tr>
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/OSCE/GI History.pdf</td><td>129</td></tr>
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/OSPE/Anatomy Revision - Male.pdf</td><td>124</td></tr>
+			<tr><td>Medical College/4th Year/9- Gastroenterology Block/Batch 10/Batch 10 Files/OSPE/Histology revision (Dr. Saima) copy.pdf</td><td>99</td></tr>
+			<tr><td>BATCH 9 EXAMs/0.5- Premed (Semester 4)/Written/Pharmacology/B10- Pharmacology Midterm Updated.pdf</td><td>97</td></tr>
+</tbody>
+</table>
+<link href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+<script src="https://osamakhalid.com/js/jquery-1.10.2.js"></script> 
+<script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script> 
+<script type="text/javascript">
+$(function(){
+    $('#statTable').DataTable({order:[[1, 'desc']]});
+});
+</script>
+{% endblock %}

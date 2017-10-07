@@ -1,0 +1,26 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+{% block title %}أعد ضبط كلمة السر{% endblock %}
+{% block content %}
+
+{% include 'header.html' %}
+
+<h2>أعد ضبط كلمة السر</h2>
+
+	{% if error_message %}<p class="alert alert-danger">
+{% if error_message == 'unknown' %}
+حدث خطأ غير معروف!  هل أنت متاكد أنك مسجل في السحابة الطبية؟  إذا استمرت المشكلة، راسلنا على <a href="mailto:info@ksauhs-med.com">info@ksauhs-med.com</a> لنساعدك على حلّه.
+{% elif error_message == 'not_registered' %}
+لم يسبق لك أن سجّلت!  <a href="{% url 'register:register' %}">سجل الآن</a>.
+{% elif error_message == 'university_email' %}
+يمكن فقط لمنسوبي كلية الطب في جامعة الملك سعود بن عبد العزيز للعلوم الصحية التسجيل في السحابة الطبية. نرجو استخدام بريد جامعي.
+{% endif %}
+	</p>{% endif %}
+	<form action="{% url 'register:forgotten' %}" method="post" class="form">
+	{% bootstrap_form form %}
+		{% buttons %}
+		<button type="submit" class="btn btn-primary btn-block">
+		{% bootstrap_icon "share-alt" %} أعد ضبط كلمة السر
+		</button>
+		{% endbuttons %}
+	</form>
+{% endblock %}
