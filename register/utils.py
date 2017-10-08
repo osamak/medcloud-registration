@@ -11,7 +11,7 @@ def createuser(user, password, group):
     os.environ['OC_PASS'] = password
     command = "/usr/local/bin/php70 /home/medcloud/webapps/ownphp70/occ user:add {} --password-from-env -g {} -n".format(user, group)
     output = subprocess.call(command, shell=True)
-    if output == 0:
+    if output is True:
         return True
     else:
         return False
