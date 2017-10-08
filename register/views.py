@@ -4,19 +4,20 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from post_office import mail
 
 from .models import Registration, Batch, colleges
 from . import utils, forms
 
 
-new_message = u"""نشكرك على التسجيل في السحابة الطبية
+new_message = """نشكرك على التسجيل في السحابة الطبية
 اسم المستخدم: %s
 كلمة السر: %s
 رابط السحابة: https://ksauhs-med.com/
 آملين أن تجد فيها ما يفيد!
 """
 
-forgotten_message = u"""هذه معلوماتك الجديدة للدخول إلى السحابة الطبية:
+forgotten_message = """هذه معلوماتك الجديدة للدخول إلى السحابة الطبية:
 اسم المستخدم: %s
 كلمة السر: %s
 رابط السحابة: https://ksauhs-med.com/
@@ -47,9 +48,9 @@ def register(request):
                 if utils.createuser(user, password, group):
                     registration.is_successful = True
                     registration.save()
-                    send_mail(u'حسابك على السحابة الطبية', new_message %
-                              (user, password), 'info@ksauhs-med.com',
-                              [email], fail_silently=False)
+                    mail.send(email, 'info@ksauhs-med.com',
+                              subject='حسابك على السحابة الطبية',
+                              message=new_message % (user, password))
                     return HttpResponseRedirect(reverse('register:thanks'))
                 else:
                     context = {'form': form, 'error_message': 'unknown'}
@@ -82,9 +83,9 @@ def forgotten(request):
                     previous_registration.password = new_password
                     previous_registration.forgotten_password = True
                     previous_registration.save()
-                    send_mail(u'حسابك على السحابة الطبية', forgotten_message %
-                              (user, new_password), 'info@ksauhs-med.com',
-                              [email], fail_silently=False)
+                    mail.send(email, 'info@ksauhs-med.com',
+                              subject=u'حسابك على السحابة الطبية',
+                              message=forgotten_message % (user, new_password))
                     return HttpResponseRedirect(reverse('register:thanks'))
                 else:
                     context = {'form': form, 'error_message': 'unknown'}
