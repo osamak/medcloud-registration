@@ -40,9 +40,10 @@ def register(request):
                 registration = form.save()
                 if college == 'FMRTP':
                     user = 'user%d' % registration.pk
+                    group = college
                 else:
                     user = email.split('@')[0].lower()
-                group = str(registration.group)
+                    group = str(registration.group)
                 if utils.createuser(user, password, group):
                     registration.is_successful = True
                     registration.save()
