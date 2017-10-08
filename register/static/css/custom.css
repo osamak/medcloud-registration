@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'KacstOne';
+    src: url('../fonts/KacstOne.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	background-color:#F8F8F8;
+	padding-bottom: 40px;
+	font-family: 'KacstOne';
+	color: #5a5a5a;
+        font-size: 17px;
+	text-align: justify;
+}     
+
+h1, h2 {
+	color: black;
+	margin-bottom: 5px;
+	font-weight: 700;
+}
+
+h2 {
+	font-size: 25px;
+}
+     
+
+#header {
+	text-align: center;
+	margin-bottom: 44px;
+}
+
+#header img {
+	width: 250px;
+	height: 211px;
+	margin-top: 20px;
+}
+
+#header h1 {
+	font-weight: 700;
+	font-size: 45px;
+	margin-bottom: 0px;
+	margin-top: 40px;
+}
+
+#header h1 a {
+    color: #5A5A5A;
+}
+
+#header h1 a:hover {
+    text-decoration: none;
+}
+
+
+.footer {
+    padding-bottom: 2em;
+    border-top: 1px solid #E5E5E5;
+    margin-top: 3em;
+}
+
+.mnote {
+    direction: rtl;
+    text-align: justify;
+    line-height: 26px;
+    border-radius: 3px;
+    height: auto;
+    margin: 0 4px 44px 0px;
+    padding: 15px 20px;
+    display: block;
+    background-color: rgba(230, 230, 230, 0.4);
+    box-shadow: 0px 0px 1px #CCC;
+    font-family: 'KacstOne';
+}
+
+@media (min-width: 767px) {
+	#header h1 {
+		line-height: 1.4em;
+	}
+	#header img {
+		margin-left: -30px;
+	}
+}
+
